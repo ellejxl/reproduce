@@ -1,7 +1,7 @@
 remove(list = ls())
 library(SeuratData)
 library(Seurat)
-InstallData("pbmcsca")
+#InstallData("pbmcsca")
 #loading data
 data("pbmcsca")
 
