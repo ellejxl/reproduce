@@ -1,6 +1,6 @@
 # Reproduce
 
-This repository contains scripts and information to reproduce all results in scAnnotate manuscript.
+This repository contains scripts and information to reproduce all results in our manuscript.
 
 # About this project 
 
@@ -13,7 +13,7 @@ algorithms. We use a marginal mixture model to describe both the dropout proport
 
 <details><summary>code</summary>
 
-    ├── code  
+    ├── code                                               # All of scripts to reproduce the results in scAnnotate manuscript.
     │     ├── 1. PBMC
     │            ├── preprocessing_PBMC_crossplatform.sh   # Shell script to run the preprocessing_PBMC_crossplatform.R
     │            ├── preprocessing_PBMC_crossplatform.R    # R script to preprocessing the PBMC dataset
@@ -29,6 +29,7 @@ algorithms. We use a marginal mixture model to describe both the dropout proport
     │            ├── scPred.r                              # R scripts to run the competing method scPred with selected dataset
     │            ├── singleCellNet.r                       # R scripts to run the competing method singleCellNet with selected dataset
     │            └── SingleR.r                             # R scripts to run the competing method SingleR with selected dataset
+    |
     │     ├── 2. CellBench
     │            ├── preprocessing_CellBench.sh            # Shell script to run the preprocessing_CellBench.R
     │            ├── preprocessing_CellBench.R             # R script to preprocessing the CellBench dataset
@@ -44,6 +45,7 @@ algorithms. We use a marginal mixture model to describe both the dropout proport
     │            ├── scPred.r                              # R scripts to run the competing method scPred with selected dataset
     │            ├── singleCellNet.r                       # R scripts to run the competing method singleCellNet with selected dataset
     │            └── SingleR.r                             # R scripts to run the competing method SingleR with selected dataset  
+    |
     │     ├── 3. Brain
     │            ├── 3.1. ALM_MTG
     |                    ├── preprocessing_ALM_MTG.sh      # Shell script to run the preprocessing_ALM_MTG.R
@@ -60,6 +62,7 @@ algorithms. We use a marginal mixture model to describe both the dropout proport
     │                    ├── scPred.r                      # R scripts to run the competing method scPred with selected dataset
     │                    ├── singleCellNet.r               # R scripts to run the competing method singleCellNet with selected dataset
     │                    └── SingleR.r                     # R scripts to run the competing method SingleR with selected dataset   
+    |
     │            └── 3.2. V1_MTG   
     |                    ├── preprocessing_V1_MTG.sh      # Shell script to run the preprocessing_V1_MTG.R
     │                    ├── preprocessing_V1_MTG.R       # R script to preprocessing the V1 and MTG dataset
@@ -75,6 +78,7 @@ algorithms. We use a marginal mixture model to describe both the dropout proport
     │                    ├── scPred.r                      # R scripts to run the competing method scPred with selected dataset
     │                    ├── singleCellNet.r               # R scripts to run the competing method singleCellNet with selected dataset
     │                    └── SingleR.r                     # R scripts to run the competing method SingleR with selected dataset   
+    |
     │     ├── 4. Pancrease
     │            ├── processing_Baron.sh                   # Shell script to run the processing_Baron.R
     │            ├── processing_Baron.R                    # R script to preprocessing the Baron pancrease dataset
@@ -90,7 +94,7 @@ algorithms. We use a marginal mixture model to describe both the dropout proport
     │            ├── scPred.r                              # R scripts to run the competing method scPred with selected dataset
     │            ├── singleCellNet.r                       # R scripts to run the competing method singleCellNet with selected dataset
     │            └── SingleR.r                             # R scripts to run the competing method SingleR with selected dataset 
-
+    │
     │     └── 5. CV_Baron
     │            ├── cv_Baronhuman.sh                      # Shell script to run the cv_Baronhuman.R
     │            ├── cv_Baronhuman.R                       # R script to processing the Baron human pancrease dataset
@@ -110,14 +114,14 @@ algorithms. We use a marginal mixture model to describe both the dropout proport
 
 <details><summary>results</summary>
    
-    ├── results
+    ├── results                                            # All results used in scAnnotate manuscript.
     │     ├── 1. annotation results
-    │            ├── 1.1 PBMC                              # store all the annotation results for each methods on PBMC dataset
-    │            ├── 1.2 CellBench                         # store all the annotation results for each methods on CellBench dataset 
-    │            ├── 1.3 Brain                             # store all the annotation results for each methods on Brain dataset
-    │            ├── 1.4 Pancrease                         # store all the annotation results for each methods on pancrease dataset
-    │            └── 1.5 CV_Baron                          # store all the annotation results for each methods on Baron human dataset
-  
+    │            ├── 1.1 PBMC                              # All annotation results for each methods on PBMC dataset
+    │            ├── 1.2 CellBench                         # All annotation results for each methods on CellBench dataset 
+    │            ├── 1.3 Brain                             # All annotation results for each methods on Brain dataset
+    │            ├── 1.4 Pancrease                         # All annotation results for each methods on pancrease dataset
+    │            └── 1.5 CV_Baron                          # All annotation results for each methods on Baron human dataset
+    |
     │     └── 2. performance results        
     │            ├── results_crossplatform.R               # R script to evaluate the performance of each methods on cross-platform dataset by F1 score of each cell population, mean of F1 score, and overall accuracy
     │            ├── results_crossspecies.R                # R script to evaluate the performance of each methods on cross-species dataset by F1 score of each cell population, mean of F1 score, and overall accuracy
@@ -167,7 +171,7 @@ R CMD INSTALL scAnnotate_0.0.1.tar
 
 # Running files
 - We have arrange the scripts by each dataset (1. PBMC 2. CellBench 3. Brain 4. Pancrease 5. CV_Baron), so you could follow the order of each dataset to reproduce all results. 
-- All of our scripts were running on the ComputeCanada, please change the account ID in each shell script (#SBATCH --account=) to your ComputeCanada accout before submit the each shell script.
+- All of our scripts were running on the ComputeCanada. Before you submit the shell script, please change the account ID in each shell script (#SBATCH --account=) to your ComputeCanada accout. 
 - All of the raw datasets used in our study were publicly available. Due to the size limitation of Github, we didn't upload the raw data files here. You should download the raw dataset directly from its original sources before running the scripts.
 
 <details><summary>1. PBMC </summary>
