@@ -1,6 +1,6 @@
 # Reproduce
 
-This repository contains scripts and information to reproduce all results in scAnnotate manuscript.
+This repository contains scripts and information to reproduce all results in our manuscript.
 
 # About this project 
 
