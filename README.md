@@ -122,13 +122,10 @@ algorithms. We use a marginal mixture model to describe both the dropout proport
     │            ├── 1.4 Pancrease                         # All annotation results for each methods on pancrease dataset
     │            └── 1.5 CV_Baron                          # All annotation results for each methods on Baron human dataset
     |
-    │     └── 2. performance results        
-    │            ├── results_crossplatform.R               # R script to evaluate the performance of each methods on cross-platform dataset by F1 score of each cell population, mean of F1 score, and overall accuracy
-    │            ├── results_crossspecies.R                # R script to evaluate the performance of each methods on cross-species dataset by F1 score of each cell population, mean of F1 score, and overall accuracy
-    │            ├── results_cv.R                          # R script to evaluate the performance of each methods on intra-dataset (Baron_human) by F1 score of each cell population, mean of F1 score, and overall accuracy
-    │            ├── results_crossplatform.rds             # rds file store the performance results for each methods on cross-platform dataset
-    │            ├── results_crossspecies.rds              # rds file store the performance results for each methods on cross-species dataset
-    │            └── results_cv.rds                        # rds file store the performance results for each methods on intra-dataset (Baron_human)
+    │     └── 2. analysis scripts        
+    │            ├── results_crossplatform.R               # R script to evaluate the performance of each methods on cross-platform dataset by accuracy of each cell population, mean of accuracy, and overall accuracy
+    │            ├── results_crossspecies.R                # R script to evaluate the performance of each methods on cross-species dataset by accuracy of each cell population, mean of accuracy, and overall accuracy
+    │            └──results_cv.R                          # R script to evaluate the performance of each methods on intra-dataset (Baron_human) by accuracy of each cell population, mean of accuracy, and overall accuracy 
 </details>
   
 
@@ -158,6 +155,13 @@ algorithms. We use a marginal mixture model to describe both the dropout proport
 |magrittr|2.0.1|
 |MTPS|1.0.1|
 |SeuratData|0.2.1|
+|stringr|1.7.6|
+|ggplot2|3.3.5|
+|reshape2|1.4.4|
+|dplyr|1.0.7|
+|ggpubr|0.4.0|
+|ggdendro|0.1.23|
+
 
 - scAnnotate will be available to download from CRAN later. Before it is available in CRAN, you can directly download the package file scAnnotate_0.0.1.tar from here.
 
