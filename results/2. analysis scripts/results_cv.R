@@ -6,35 +6,31 @@ library(reshape2)
 library(dplyr)
 
 #======================================================================
-#Function to calculate the f1 score and accuracy
+#Function to calculate the accuracy of cell population and overall auucracy
 #inputs:
 #1. prediction:classification result from model 
 #2. cell_label:label cell-type for each cell 
 #3. cellnames:names of each celltype 
 #
 #outputs:
-#f1 score matrix: f1 score for each cell-type, mean of f1 score,and accuracy
+#accuracy score matrix: accuracy score for each cell-type, mean of accuracy score,and accuracy
 #========================================================================
 eva.cal=function(prediction,cell_label,cellnames){
-  F1=matrix(NA,nrow = 1,ncol = length(cellnames)+2)
-  colnames(F1)=c(cellnames,"mean","accuracy")
+  acc=matrix(NA,nrow = 1,ncol = length(cellnames)+2)
+  colnames(acc)=c(cellnames,"mean of accuracy","overall accuracy")
   for(jj in 1:length(cellnames)){
     tp=length(which(cell_label==cellnames[jj]&prediction==cellnames[jj]))#true positive
-    fp=length(which(cell_label!=cellnames[jj]&prediction==cellnames[jj]))#false positive
-    fn=length(which(cell_label==cellnames[jj]&prediction!=cellnames[jj]))#false negative
-    precision=tp/(tp+fp)#precision
-    recall=tp/(tp+fn)#recall
-    F1[1,jj]=2*(precision*recall)/(precision+recall)
+    acc[1,jj]=tp/length(which(cell_label==cellnames[jj]))
   }
-  #average F1 error rate
-  F1[1,][is.nan(F1[1,])]=0
-  F1[1,length(cellnames)+1]=mean(F1[1,1:length(cellnames)])
+  #average acc error rate
+  acc[1,][is.nan(acc[1,])]=0
+  acc[1,length(cellnames)+1]=mean(acc[1,1:length(cellnames)])
   
   #accuracy:
   lab_c=table(prediction==cell_label)["TRUE"]
   accuracy=lab_c/length(cell_label)
-  F1[1,length(cellnames)+2]=accuracy
-  return(F1)
+  acc[1,length(cellnames)+2]=accuracy
+  return(acc)
 }
 
 
@@ -60,7 +56,7 @@ for(jj in 1:10){
   }
 }
 
-#saveRDS(label_list,file = "CV_label_predicition.rds")
+saveRDS(label_list,file = "CV_label_predicition.rds")
 #2. performance for each methods:
 
 perform.list=list()
@@ -78,6 +74,50 @@ for(ii in 1:10){
   }
 }
 
-
 saveRDS(perform.list,file="CV_performance.rds")
+
+
+
+
+#3.acc summary
+acc.oup.dat=matrix(NA,ncol =length(methods.names),nrow = length(label_list) )
+colnames(acc.oup.dat)=methods.names
+rownames(acc.oup.dat)=c(1:10)
+
+for(ii in 1:10){
+  for(kk in 1:length(methods.names)){
+    acc.oup.dat[ii,kk]=perform.list[[ii]][kk,ncol(perform.list[[ii]])]
+  }
+}
+
+
+
+#acc.oup.dat[is.na(acc.oup.dat)]=0
+
+
+df=as.data.frame(acc.oup.dat)
+df$row.names=rownames(df)
+long.df=melt(df,id=c("row.names"))
+colnames(long.df)=c("replications","Methods","Accuracy")
+
+#boxplot
+ggplot(long.df,aes(x=Methods,y=Accuracy))+
+  geom_boxplot(colour="grey50")+
+  labs(y="Classification accuracy",
+       x="methods")+
+  theme_bw()+
+  theme(axis.title.y = element_blank())+
+  theme(axis.title.x = element_blank())+
+  theme(text = element_text(size=22),legend.text = element_text(size=12),legend.title = element_text(size=12))+
+  coord_flip()
+
+ggsave("boxplot_cv_acc.png",width = 25, height = 25, units = "cm")
+
+#4. some analysis
+mean.matrix=matrix(NA,nrow = length(perform.list),ncol = ncol(perform.list[[1]]))
+colnames(mean.matrix)=colnames(perform.list[[1]])
+for(ii in 1:nrow(mean.matrix)){
+  mean.matrix[ii,]=perform.list[[ii]][1,]
+}
+round(colMeans(mean.matrix),4)
 

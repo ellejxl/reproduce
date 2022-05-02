@@ -4,6 +4,7 @@ library(stringr)
 library(ggplot2)
 library(reshape2)
 library(dplyr)
+library(ggpubr)
 
 #======================================================================
 #Function to calculate the f1 score and accuracy
@@ -91,7 +92,7 @@ for(ii in 1:length(train_dat_list)){
   }
 }
 
-#saveRDS(label_list,file = "crossspecies_label_predicition.rds")
+saveRDS(label_list,file = "crossspecies_label_predicition.rds")
 #2. performance for each methods:
 
 perform.list=list()
@@ -110,3 +111,94 @@ for(ii in 1:length(dat_combine_list)){
 }
 
 saveRDS(perform.list,file="crossspecies_performance.rds")
+
+
+#3.acc summary
+acc.oup.dat=matrix(NA,ncol =length(methods.names),nrow = length(dat_combine_list) )
+colnames(acc.oup.dat)=methods.names
+dat_combine_list
+rownames(acc.oup.dat)=c("human_mouse (Pancrease)",
+                        "mouse_human (Pancrease)",
+                        "mouse[V1]_human (Brain)",
+                        "mouse[ALM]_human (Brain)",
+                        "human_mouse[V1] (Brain)",
+                        "human_mouse[ALM] (Brain)")
+
+for(ii in 1:length(dat_combine_list)){
+  for(kk in 1:length(methods.names)){
+    acc.oup.dat[ii,kk]=perform.list[[ii]][kk,ncol(perform.list[[ii]])]
+  }
+}
+
+
+
+acc.oup.dat[is.na(acc.oup.dat)]=0
+
+#4. test significant difference by Wilcoxon-Sum test
+wilcox.matrix=matrix(NA,nrow = length(methods.names)-1,ncol =1)
+colnames(wilcox.matrix)=methods.names[1]
+rownames(wilcox.matrix)=methods.names[-1]
+for(ii in 1:nrow(wilcox.matrix)){
+  wilcox.matrix[ii,1]=wilcox.test(acc.oup.dat[,1],acc.oup.dat[,ii+1])$p.value
+}
+
+
+#5.make plots:
+inv.oup=-(acc.oup.dat)
+Ranking=t(apply(inv.oup,1,min_rank))
+Ranking=round(Ranking,0)
+
+Ranking[which(is.na(acc.oup.dat))]=NA
+
+df=as.data.frame(Ranking)
+df$row.names=rownames(df)
+long.df=melt(df,id=c("row.names"))
+
+df2=as.data.frame(acc.oup.dat)
+df2$row.names=rownames(df2)
+long.df.2=melt(df2,id=c("row.names"))
+colnames(long.df.2)=c("row.names","variable","Accuracy")
+
+df.oup=full_join(long.df,long.df.2,by=c("row.names","variable"))
+colnames(df.oup)=c("dataset","methods","Ranking","Accuracy")
+df.oup$Ranking=factor(df.oup$Ranking)
+
+#specific the order of y axis
+df.oup$dataset=as.character(df.oup$dataset) #turn the variable into a character vector
+df.oup$dataset=factor(df.oup$dataset,levels = unique(df.oup$dataset) ) #then turn it back into a factor with the levels in the correct order
+
+#ranking plot
+ggplot(df.oup, aes(x=dataset,y = methods))+
+  theme_classic()+
+  geom_point(aes(col=Ranking,size=Accuracy))+
+  labs(x="Datasets (training, test)")+
+  scale_colour_manual(values = c("#D30000","#FF2800","#FA8072",
+                                 "#FF9529","#FFDF00",
+                                 "#0171B9","#AFDCEC",
+                                 "#107C10","#3CB043","#d0f0c0"))+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=0.35))+
+  theme(axis.title.y = element_blank())+
+  theme(axis.title.x = element_blank())+
+  theme(text = element_text(size=22),legend.title = element_text(size=22),legend.position = "left")+
+  guides(color = guide_legend(override.aes = list(size = 6)))
+
+ggsave("crossspecies_acc.png",width = 25, height = 25, units = "cm")  
+
+
+#boxplot
+ggplot(long.df.2,aes(x=variable,y=Accuracy))+
+  geom_boxplot()+
+  labs(y="Classification accuracy",
+       x="methods")+
+#  geom_dotplot(binaxis='y', stackdir='center', dotsize=0.05)+
+#  geom_jitter(shape=16, position=position_jitter(0.2))+
+  theme_bw()+
+  theme(axis.title.y = element_blank())+
+  theme(axis.title.x = element_blank())+
+  theme(text = element_text(size=22),legend.text = element_text(size=12),legend.title = element_text(size=12))+
+  coord_flip()
+
+
+ggsave("boxplot_crossspecies_acc.png",width = 25, height = 25, units = "cm")
+
+
