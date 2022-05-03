@@ -1,6 +1,6 @@
 # Reproduce
 
-This repository contains scripts and information to reproduce all results in our manuscript.
+This repository contains scripts and information to reproduce all results in the scAnnotate manuscript.
 
 # About this project 
 
@@ -13,126 +13,126 @@ algorithms. We use a marginal mixture model to describe both the dropout proport
 
 <details><summary>code</summary>
 
-    ├── code                                               # All of scripts to reproduce the results in scAnnotate manuscript.
+    ├── code                                               # All of the scripts to reproduce the results in the scAnnotate manuscript.
     │     ├── 1. PBMC
-    │            ├── preprocessing_PBMC_crossplatform.sh   # Shell script to run the preprocessing_PBMC_crossplatform.R
-    │            ├── preprocessing_PBMC_crossplatform.R    # R script to preprocessing the PBMC dataset
-    │            ├── run_pbmc.sh                           # Shell script with loops to submit all shell scripts for each methods on PBMC dataset at once
-    │            ├── run.sh                                # shell script to run each corresponding R script on selected dataset
-    │            ├── scAnnotate.r                          # R scripts to run our method scAnnotate with selected dataset
-    │            ├── CaSTLe.r                              # R scripts to run the competing method CaSTLe with selected dataset
-    │            ├── CHETAH.r                              # R scripts to run the competing method CHETAH with selected dataset
-    │            ├── scClassify.r                          # R scripts to run the competing method scClassify with selected dataset
-    │            ├── scID.r                                # R scripts to run the competing method scID with selected dataset
-    │            ├── scmapCell.r                           # R scripts to run the competing method scmapCell with selected dataset
-    │            ├── scmapCluster.r                        # R scripts to run the competing method scmapCluster with selected dataset
-    │            ├── scPred.r                              # R scripts to run the competing method scPred with selected dataset
-    │            ├── singleCellNet.r                       # R scripts to run the competing method singleCellNet with selected dataset
-    │            └── SingleR.r                             # R scripts to run the competing method SingleR with selected dataset
+    │            ├── preprocessing_PBMC_crossplatform.sh   # Shell script to run preprocessing_PBMC_crossplatform.R
+    │            ├── preprocessing_PBMC_crossplatform.R    # R script to preprocess the PBMC dataset
+    │            ├── run_pbmc.sh                           # Shell script with loops to submit all shell scripts for each method on the PBMC dataset at once
+    │            ├── run.sh                                # Shell script to run each corresponding R script on the selected dataset
+    │            ├── scAnnotate.r                          # R script to run our method, scAnnotate, on the selected dataset
+    │            ├── CaSTLe.r                              # R script to run competing method CaSTLe on the selected dataset
+    │            ├── CHETAH.r                              # R script to run competing method CHETAH on the selected dataset
+    │            ├── scClassify.r                          # R script to run competing method scClassify on the selected dataset
+    │            ├── scID.r                                # R script to run competing method scID on the selected dataset
+    │            ├── scmapCell.r                           # R script to run competing method scmapCell on the selected dataset
+    │            ├── scmapCluster.r                        # R script to run competing method scmapCluster on the selected dataset
+    │            ├── scPred.r                              # R script to run competing method scPred on the selected dataset
+    │            ├── singleCellNet.r                       # R script to run competing method singleCellNet on the selected dataset
+    │            └── SingleR.r                             # R script to run competing method SingleR on the selected dataset
     |
     │     ├── 2. CellBench
-    │            ├── preprocessing_CellBench.sh            # Shell script to run the preprocessing_CellBench.R
-    │            ├── preprocessing_CellBench.R             # R script to preprocessing the CellBench dataset
-    │            ├── run_cellbench.sh                      # Shell script with loops to submit all shell scripts for each methods on cellbench dataset at once
-    │            ├── run.sh                                # Shell script to run each corresponding R script on selected dataset
-    │            ├── scAnnotate.r                          # R scripts to run our method scAnnotate with selected dataset
-    │            ├── CaSTLe.r                              # R scripts to run the competing method CaSTLe with selected dataset
-    │            ├── CHETAH.r                              # R scripts to run the competing method CHETAH with selected dataset
-    │            ├── scClassify.r                          # R scripts to run the competing method scClassify with selected dataset
-    │            ├── scID.r                                # R scripts to run the competing method scID with selected dataset
-    │            ├── scmapCell.r                           # R scripts to run the competing method scmapCell with selected dataset
-    │            ├── scmapCluster.r                        # R scripts to run the competing method scmapCluster with selected dataset
-    │            ├── scPred.r                              # R scripts to run the competing method scPred with selected dataset
-    │            ├── singleCellNet.r                       # R scripts to run the competing method singleCellNet with selected dataset
-    │            └── SingleR.r                             # R scripts to run the competing method SingleR with selected dataset  
+    │            ├── preprocessing_CellBench.sh            # Shell script to run preprocessing_CellBench.R
+    │            ├── preprocessing_CellBench.R             # R script to preprocess the CellBench dataset
+    │            ├── run_cellbench.sh                      # Shell script with loops to submit all shell scripts for each method on the CellBench dataset at once
+    │            ├── run.sh                                # Shell script to run each corresponding R script on the selected dataset
+    │            ├── scAnnotate.r                          # R script to run our method, scAnnotate, on the selected dataset
+    │            ├── CaSTLe.r                              # R script to run competing method CaSTLe on the selected dataset
+    │            ├── CHETAH.r                              # R script to run competing method CHETAH on the selected dataset
+    │            ├── scClassify.r                          # R script to run competing method scClassify on the selected dataset
+    │            ├── scID.r                                # R script to run competing method scID on the selected dataset
+    │            ├── scmapCell.r                           # R script to run competing method scmapCell on the selected dataset
+    │            ├── scmapCluster.r                        # R script to run competing method scmapCluster on the selected dataset
+    │            ├── scPred.r                              # R script to run competing method scPred on the selected dataset
+    │            ├── singleCellNet.r                       # R script to run competing method singleCellNet on the selected dataset
+    │            └── SingleR.r                             # R script to run competing method SingleR on the selected dataset  
     |
     │     ├── 3. Brain
     │            ├── 3.1. ALM_MTG
-    |                    ├── preprocessing_ALM_MTG.sh      # Shell script to run the preprocessing_ALM_MTG.R
-    │                    ├── preprocessing_ALM_MTG.R       # R script to preprocessing the ALM and MTG dataset
-    │                    ├── run_ALM_MTG.sh                # Shell script with loops to submit all shell scripts for each methods on ALM and MTG dataset at once
-    │                    ├── run.sh                        # Shell script to run each corresponding R script on selected dataset
-    │                    ├── scAnnotate.r                  # R scripts to run our method scAnnotate with selected dataset
-    │                    ├── CaSTLe.r                      # R scripts to run the competing method CaSTLe with selected dataset
-    │                    ├── CHETAH.r                      # R scripts to run the competing method CHETAH with selected dataset
-    │                    ├── scClassify.r                  # R scripts to run the competing method scClassify with selected dataset
-    │                    ├── scID.r                        # R scripts to run the competing method scID with selected dataset
-    │                    ├── scmapCell.r                   # R scripts to run the competing method scmapCell with selected dataset
-    │                    ├── scmapCluster.r                # R scripts to run the competing method scmapCluster with selected dataset
-    │                    ├── scPred.r                      # R scripts to run the competing method scPred with selected dataset
-    │                    ├── singleCellNet.r               # R scripts to run the competing method singleCellNet with selected dataset
-    │                    └── SingleR.r                     # R scripts to run the competing method SingleR with selected dataset   
+    |                    ├── preprocessing_ALM_MTG.sh      # Shell script to run preprocessing_ALM_MTG.R
+    │                    ├── preprocessing_ALM_MTG.R       # R script to preprocess the ALM and MTG datasets
+    │                    ├── run_ALM_MTG.sh                # Shell script with loops to submit all shell scripts for each method on the ALM and MTG datasets at once
+    │                    ├── run.sh                        # Shell script to run each corresponding R script on the selected dataset
+    │                    ├── scAnnotate.r                  # R script to run our method, scAnnotate, on the selected dataset
+    │                    ├── CaSTLe.r                      # R script to run competing method CaSTLe on the selected dataset
+    │                    ├── CHETAH.r                      # R script to run competing method CHETAH on the selected dataset
+    │                    ├── scClassify.r                  # R script to run competing method scClassify on the selected dataset
+    │                    ├── scID.r                        # R script to run competing method scID on the selected dataset
+    │                    ├── scmapCell.r                   # R script to run competing method scmapCell on the selected dataset
+    │                    ├── scmapCluster.r                # R script to run competing method scmapCluster on the selected dataset
+    │                    ├── scPred.r                      # R script to run competing method scPred on the selected dataset
+    │                    ├── singleCellNet.r               # R script to run competing method singleCellNet on the selected dataset
+    │                    └── SingleR.r                     # R script to run competing method SingleR on the selected dataset   
     |
     │            └── 3.2. V1_MTG   
-    |                    ├── preprocessing_V1_MTG.sh      # Shell script to run the preprocessing_V1_MTG.R
-    │                    ├── preprocessing_V1_MTG.R       # R script to preprocessing the V1 and MTG dataset
-    │                    ├── run_V1_MTG.sh                # Shell script with loops to submit all shell scripts for each methods on V1 and MTG dataset at once
-    │                    ├── run.sh                        # Shell script to run each corresponding R script on selected dataset
-    │                    ├── scAnnotate.r                  # R scripts to run our method scAnnotate with selected dataset
-    │                    ├── CaSTLe.r                      # R scripts to run the competing method CaSTLe with selected dataset
-    │                    ├── CHETAH.r                      # R scripts to run the competing method CHETAH with selected dataset
-    │                    ├── scClassify.r                  # R scripts to run the competing method scClassify with selected dataset
-    │                    ├── scID.r                        # R scripts to run the competing method scID with selected dataset
-    │                    ├── scmapCell.r                   # R scripts to run the competing method scmapCell with selected dataset
-    │                    ├── scmapCluster.r                # R scripts to run the competing method scmapCluster with selected dataset
-    │                    ├── scPred.r                      # R scripts to run the competing method scPred with selected dataset
-    │                    ├── singleCellNet.r               # R scripts to run the competing method singleCellNet with selected dataset
-    │                    └── SingleR.r                     # R scripts to run the competing method SingleR with selected dataset   
+    |                    ├── preprocessing_V1_MTG.sh      # Shell script to run preprocessing_V1_MTG.R
+    │                    ├── preprocessing_V1_MTG.R       # R script to preprocess the V1 and MTG datasets
+    │                    ├── run_V1_MTG.sh                # Shell script with loops to submit all shell scripts for each method on the V1 and MTG datasets at once
+    │                    ├── run.sh                        # Shell script to run each corresponding R script on the selected dataset
+    │                    ├── scAnnotate.r                  # R script to run our method, scAnnotate, on the selected dataset
+    │                    ├── CaSTLe.r                      # R script to run competing method CaSTLe on the selected dataset
+    │                    ├── CHETAH.r                      # R script to run competing method CHETAH on the selected dataset
+    │                    ├── scClassify.r                  # R script to run competing method scClassify on the selected dataset
+    │                    ├── scID.r                        # R script to run competing method scID on the selected dataset
+    │                    ├── scmapCell.r                   # R script to run competing method scmapCell on the selected dataset
+    │                    ├── scmapCluster.r                # R script to run competing method scmapCluster on the selected dataset
+    │                    ├── scPred.r                      # R script to run competing method scPred on the selected dataset
+    │                    ├── singleCellNet.r               # R script to run competing method singleCellNet on the selected dataset
+    │                    └── SingleR.r                     # R script to run competing method SingleR on the selected dataset   
     |
-    │     ├── 4. Pancrease
-    │            ├── processing_Baron.sh                   # Shell script to run the processing_Baron.R
-    │            ├── processing_Baron.R                    # R script to preprocessing the Baron pancrease dataset
-    │            ├── run_panc.sh                           # Shell script with loops to submit all shell scripts for each methods on Baron pancrease dataset at once
-    │            ├── run.sh                                # Shell script to run each corresponding R script on selected dataset
-    │            ├── scAnnotate.r                          # R scripts to run our method scAnnotate with selected dataset
-    │            ├── CaSTLe.r                              # R scripts to run the competing method CaSTLe with selected dataset
-    │            ├── CHETAH.r                              # R scripts to run the competing method CHETAH with selected dataset
-    │            ├── scClassify.r                          # R scripts to run the competing method scClassify with selected dataset
-    │            ├── scID.r                                # R scripts to run the competing method scID with selected dataset
-    │            ├── scmapCell.r                           # R scripts to run the competing method scmapCell with selected dataset
-    │            ├── scmapCluster.r                        # R scripts to run the competing method scmapCluster with selected dataset
-    │            ├── scPred.r                              # R scripts to run the competing method scPred with selected dataset
-    │            ├── singleCellNet.r                       # R scripts to run the competing method singleCellNet with selected dataset
-    │            └── SingleR.r                             # R scripts to run the competing method SingleR with selected dataset 
+    │     ├── 4. Pancreas
+    │            ├── processing_Baron.sh                   # Shell script to run processing_Baron.R
+    │            ├── processing_Baron.R                    # R script to preprocess the Baron pancreas dataset
+    │            ├── run_panc.sh                           # Shell script with loops to submit all shell scripts for each method on the Baron pancreas dataset at once
+    │            ├── run.sh                                # Shell script to run each corresponding R script on the selected dataset
+    │            ├── scAnnotate.r                          # R scripts to run our method, scAnnotate, on the selected dataset
+    │            ├── CaSTLe.r                              # R scripts to run competing method CaSTLe on the selected dataset
+    │            ├── CHETAH.r                              # R scripts to run competing method CHETAH on the selected dataset
+    │            ├── scClassify.r                          # R scripts to run competing method scClassify on the selected dataset
+    │            ├── scID.r                                # R scripts to run competing method scID on the selected dataset
+    │            ├── scmapCell.r                           # R scripts to run competing method scmapCell on the selected dataset
+    │            ├── scmapCluster.r                        # R scripts to run competing method scmapCluster on the selected dataset
+    │            ├── scPred.r                              # R scripts to run competing method scPred on the selected dataset
+    │            ├── singleCellNet.r                       # R scripts to run competing method singleCellNet on the selected dataset
+    │            └── SingleR.r                             # R scripts to run competing method SingleR on the selected dataset 
     │
     │     └── 5. CV_Baron
-    │            ├── cv_Baronhuman.sh                      # Shell script to run the cv_Baronhuman.R
-    │            ├── cv_Baronhuman.R                       # R script to processing the Baron human pancrease dataset
-    │            ├── run_cellbench.sh                      # Shell script with loops to submit all shell scripts for each methods on Baron human pancrease dataset at once
-    │            ├── run.sh                                # Shell script to run each corresponding R script on selected dataset
-    │            ├── scAnnotate.r                          # R scripts to run our method scAnnotate with selected dataset
-    │            ├── CaSTLe.r                              # R scripts to run the competing method CaSTLe with selected dataset
-    │            ├── CHETAH.r                              # R scripts to run the competing method CHETAH with selected dataset
-    │            ├── scClassify.r                          # R scripts to run the competing method scClassify with selected dataset
-    │            ├── scID.r                                # R scripts to run the competing method scID with selected dataset
-    │            ├── scmapCell.r                           # R scripts to run the competing method scmapCell with selected dataset
-    │            ├── scmapCluster.r                        # R scripts to run the competing method scmapCluster with selected dataset
-    │            ├── scPred.r                              # R scripts to run the competing method scPred with selected dataset
-    │            ├── singleCellNet.r                       # R scripts to run the competing method singleCellNet with selected dataset
-    │            └── SingleR.r                             # R scripts to run the competing method SingleR with selected dataset   
+    │            ├── cv_Baronhuman.sh                      # Shell script to run cv_Baronhuman.R
+    │            ├── cv_Baronhuman.R                       # R script to process the Baron human pancreas dataset
+    │            ├── run_cellbench.sh                      # Shell script with loops to submit all shell scripts for each method on the Baron human pancreas dataset at once
+    │            ├── run.sh                                # Shell script to run each corresponding R script on the selected dataset
+    │            ├── scAnnotate.r                          # R script to run our method, scAnnotate, on the selected dataset
+    │            ├── CaSTLe.r                              # R script to run competing method CaSTLe on the selected dataset
+    │            ├── CHETAH.r                              # R script to run competing method CHETAH on the selected dataset
+    │            ├── scClassify.r                          # R script to run competing method scClassify on the selected dataset
+    │            ├── scID.r                                # R script to run competing method scID on the selected dataset
+    │            ├── scmapCell.r                           # R script to run competing method scmapCell on the selected dataset
+    │            ├── scmapCluster.r                        # R script to run competing method scmapCluster on the selected dataset
+    │            ├── scPred.r                              # R script to run competing method scPred on the selected dataset
+    │            ├── singleCellNet.r                       # R script to run competing method singleCellNet on the selected dataset
+    │            └── SingleR.r                             # R script to run competing method SingleR on the selected dataset   
 </details>
 
 <details><summary>results</summary>
    
-    ├── results                                            # All results used in scAnnotate manuscript.
+    ├── results                                            # All results used in the scAnnotate manuscript.
     │     ├── 1. annotation results
-    │            ├── 1.1 PBMC                              # All annotation results for each methods on PBMC dataset
-    │            ├── 1.2 CellBench                         # All annotation results for each methods on CellBench dataset 
-    │            ├── 1.3 Brain                             # All annotation results for each methods on Brain dataset
-    │            ├── 1.4 Pancrease                         # All annotation results for each methods on pancrease dataset
-    │            └── 1.5 CV_Baron                          # All annotation results for each methods on Baron human dataset
+    │            ├── 1.1 PBMC                              # All annotation results for each method on the PBMC dataset
+    │            ├── 1.2 CellBench                         # All annotation results for each method on the CellBench dataset 
+    │            ├── 1.3 Brain                             # All annotation results for each method on the Brain dataset
+    │            ├── 1.4 Pancreas                          # All annotation results for each method on the pancreas dataset
+    │            └── 1.5 CV_Baron                          # All annotation results for each method on the Baron human dataset
     |
     │     └── 2. analysis scripts        
-    │            ├── results_crossplatform.R               # R script to evaluate the performance of each methods on cross-platform dataset by accuracy of each cell population, mean of accuracy, and overall accuracy
-    │            ├── results_crossspecies.R                # R script to evaluate the performance of each methods on cross-species dataset by accuracy of each cell population, mean of accuracy, and overall accuracy
-    │            └──results_cv.R                          # R script to evaluate the performance of each methods on intra-dataset (Baron_human) by accuracy of each cell population, mean of accuracy, and overall accuracy 
+    │            ├── results_crossplatform.R               # R script to evaluate the performance of each method on cross-platform datasets by accuracy for each cell population, mean accuracy, and overall accuracy
+    │            ├── results_crossspecies.R                # R script to evaluate the performance of each method on cross-species datasets by accuracy for each cell population, mean accuracy, and overall accuracy
+    │            └──results_cv.R                          # R script to evaluate the performance of each method on intra-datasets (Baron_human) by accuracy for each cell population, mean accuracy, and overall accuracy 
 </details>
   
 
 ---
 
 # Package dependencies
-- To reproduce the results, you should download and install the required software and package with the corresponding version in the table below:
+- To reproduce the results, please download and install the required software and packages with the corresponding versions as listed in the table below.
 
 #### Tools tables:
 |software|version|
@@ -174,23 +174,23 @@ R CMD INSTALL scAnnotate_0.0.1.tar
 ---
 
 # Running files
-- We have arrange the scripts by each dataset (1. PBMC 2. CellBench 3. Brain 4. Pancrease 5. CV_Baron), so you could follow the order of each dataset to reproduce all results. 
-- All of our scripts were running on the ComputeCanada. Before you submit the shell script, please change the account ID in each shell script (#SBATCH --account=) to your ComputeCanada accout. 
-- All of the raw datasets used in our study were publicly available. Due to the size limitation of Github, we didn't upload the raw data files here. You should download the raw dataset directly from its original sources before running the scripts.
+- We have arranged the scripts by dataset type (1. PBMC 2. CellBench 3. Brain 4. Pancreas 5. CV_Baron); you can follow this order to reproduce all of our results. 
+- All of our scripts were run on ComputeCanada. Before you submit our provided shell scripts, please change the account ID in each shell script (#SBATCH --account=) to that of your own ComputeCanada account. 
+- All of the raw datasets used in our study are publicly available. Due to GitHub's file size limitation, we are unable to upload the raw data files here. Please download the raw datasets used in this study directly from their original sources before running the scripts.
 
 <details><summary>1. PBMC </summary>
   
-  1). Download the raw data: PBMC dataset was downloaded from the SeuratData package with dataset name "pbmcsca". 
+  1). Download the raw data: the PBMC dataset was downloaded from the SeuratData package with dataset name "pbmcsca". 
 ~~~
   R
   library(SeuratData)
   InstallData("pbmcsca")
 ~~~  
-  2). Process the dataset: submit the shell script to processing the PBMC dataset
+  2). Process the dataset: submit the shell script to process the PBMC dataset
 ~~~
  sbatch preprocessing_PBMC_crossplatform.sh
 ~~~
-  3). Run the methods: submit the shell script to run each methods R scripts on selected dataset.
+  3). Run the methods: submit the shell script to run each method's R script on the selected dataset.
 ~~~
  sbatch run_pbmc.sh
 ~~~
@@ -198,14 +198,14 @@ R CMD INSTALL scAnnotate_0.0.1.tar
 
 <details><summary>2. CellBench </summary> 
   
-  1). Download the raw data: CellBench was download from Zenodo https://zenodo.org/record/3357167#.YjpANOfMKw4
+  1). Download the raw data: CellBench was download from Zenodo (https://zenodo.org/record/3357167#.YjpANOfMKw4)
   
-  2). Process the dataset: submit the shell script to processing the CellBench dataset
+  2). Process the dataset: submit the shell script to process the CellBench dataset
 ~~~
  sbatch preprocessing_CellBench.sh
 ~~~
   
-  3). Run the methods: submit the shell script to run each methods R scripts on selected dataset.
+  3). Run the methods: submit the shell script to run each method's R script on the selected dataset.
 ~~~
  sbatch run_cellbench.sh
 ~~~
@@ -215,28 +215,28 @@ R CMD INSTALL scAnnotate_0.0.1.tar
   
   3.1 ALM_MTG
   
-  1). Download the raw data: CellBench was download from Zenodo https://zenodo.org/record/3357167#.YjpANOfMKw4
+  1). Download the raw data: MouseALM_HumanMTG(**) was download from Zenodo (https://zenodo.org/record/3357167#.YjpANOfMKw4)
   
-  2). Process the dataset: submit the shell script to processing the ALM and MTG dataset
+  2). Process the dataset: submit the shell script to process the ALM and MTG datasets
 ~~~
  sbatch preprocessing_ALM_MTG.sh
 ~~~
   
-  3). Run the methods: submit the shell script to run each methods R scripts on selected dataset.
+  3). Run the methods: submit the shell script to run each method's R script on the selected dataset.
 ~~~
  sbatch run_ALM_MTG.sh
 ~~~
   
   3.2 V1_MTG
  
-  1). Download the raw data: CellBench was download from Zenodo https://zenodo.org/record/3357167#.YjpANOfMKw4
+  1). Download the raw data: MouseV1_HumanMTG(**) was download from Zenodo (https://zenodo.org/record/3357167#.YjpANOfMKw4)
   
-  2). Process the dataset: submit the shell script to processing the V1 and MTG dataset
+  2). Process the dataset: submit the shell script to process the V1 and MTG datasets
 ~~~
  sbatch preprocessing_V1_MTG.sh
 ~~~
   
-  3). Run the methods: submit the shell script to run each methods R scripts on selected dataset.
+  3). Run the methods: submit the shell script to run each method's R script on the selected dataset.
 ~~~
  sbatch run_V1_MTG.sh
 ~~~
@@ -244,15 +244,15 @@ R CMD INSTALL scAnnotate_0.0.1.tar
 </details>
 
 
-<details><summary>4. Pancrease </summary>
+<details><summary>4. Pancreas </summary>
   
-  1). Download the raw data: Pancrease data was downloaded from National Center for Biotechnology Information (NCBI) Gene Expression Omnibus (GEO) for GSE84133. https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE84133&format=file
+  1). Download the raw data: Pancreas data was downloaded from National Center for Biotechnology Information (NCBI) Gene Expression Omnibus (GEO) for GSE84133. https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE84133&format=file
 
-  2). Process the dataset: submit the shell script to processing the Baron pancrease dataset
+  2). Process the dataset: submit the shell script to process the Baron pancreas dataset
 ~~~
  sbatch processing_Baron.sh
 ~~~
-  3). Run the methods: submit the shell script to run each methods R scripts on selected dataset.
+  3). Run the methods: submit the shell script to run each method's R script on the selected dataset.
 ~~~
  sbatch run_panc.sh
 ~~~
@@ -261,13 +261,13 @@ R CMD INSTALL scAnnotate_0.0.1.tar
 
 <details><summary>5. CV_Baron </summary>
   
-  1). move the select the dataset into the folder: selected dataset "Baron_human.rds" was output from processing_Baron.R
+  1). Move the selected dataset into the (**home directory?) folder: the selected dataset "Baron_human.rds" is outputted from processing_Baron.R (which is already run in Step 4 above)
 
-  2). Process the dataset: submit the shell script to processing the Baron human pancrease dataset
+  2). Process the dataset: submit the shell script to process the Baron human pancreas dataset
 ~~~
  sbatch cv_Baronhuman.sh
 ~~~
-  3). Run the methods: submit the shell script to run each methods R scripts on selected dataset.
+  3). Run the methods: submit the shell script to run each method's R script on the selected dataset.
 ~~~
  sbatch run_baron10.sh
 ~~~
