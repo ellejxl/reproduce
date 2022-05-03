@@ -246,7 +246,7 @@ R CMD INSTALL scAnnotate_0.0.1.tar
 
 <details><summary>4. Pancreas </summary>
   
-  1). Download the raw data: Pancreas data was downloaded from National Center for Biotechnology Information (NCBI) Gene Expression Omnibus (GEO) for GSE84133. https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE84133&format=file
+  1). Download the raw data: the pancreas data was downloaded from National Center for Biotechnology Information (NCBI) Gene Expression Omnibus (GEO) for GSE84133. https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE84133&format=file
 
   2). Process the dataset: submit the shell script to process the Baron pancreas dataset
 ~~~
