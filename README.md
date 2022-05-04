@@ -134,7 +134,7 @@ algorithms. We use a marginal mixture model to describe both the dropout proport
 # Package dependencies
 - To reproduce the results, please download and install the required software and packages with the corresponding versions as listed in the table below.
 
-#### Tools tables:
+#### Tools table:
 |software|version|
 |--------|-------|
 |R|4.1.2|
