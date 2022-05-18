@@ -117,8 +117,8 @@ saveRDS(perform.list,file="crossspecies_performance.rds")
 acc.oup.dat=matrix(NA,ncol =length(methods.names),nrow = length(dat_combine_list) )
 colnames(acc.oup.dat)=methods.names
 dat_combine_list
-rownames(acc.oup.dat)=c("human_mouse (Pancrease)",
-                        "mouse_human (Pancrease)",
+rownames(acc.oup.dat)=c("human_mouse (Pancreas)",
+                        "mouse_human (Pancreas)",
                         "mouse[V1]_human (Brain)",
                         "mouse[ALM]_human (Brain)",
                         "human_mouse[V1] (Brain)",

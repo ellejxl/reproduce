@@ -218,10 +218,36 @@ ggsave("boxplot_crossplatform_dataset.png",width = 50, height = 25, units = "cm"
 #heatmap functions:
 
 #only well performed methods
+for(pp in 1:length(label_list)){
+  
+  selected.results=label_list[[pp]][,c(1:7)]
+  
+  tf.matrix=matrix(NA,nrow = nrow(selected.results),ncol = ncol(selected.results)-1)
+  colnames(tf.matrix)=methods.names[1:6]
+  
+  for(ii in 1:ncol(tf.matrix)){
+    tf.matrix[which(selected.results[,1]==selected.results[,ii+1]),ii]="1"
+    tf.matrix[which(selected.results[,1]!=selected.results[,ii+1]),ii]="0"
+  }
+  
+  tf.matrix=apply(tf.matrix,2,as.numeric)
+  
+  tf.matrix=tf.matrix[-which(rowSums(tf.matrix)==0),]
+  tf.matrix=tf.matrix[-which(rowSums(tf.matrix)==ncol(tf.matrix)),]
+  
+  
+  heatmap(t(tf.matrix),
+          scale = "none",
+          col=c("black","white"))
+}
+
 
 #ggplot
 
-for(pp in c(19,22)){
+
+#only well performed methods
+for(pp in 1:length(label_list)){
+  
   #clustering all
   selected.results=label_list[[pp]][,c(1:7)]
   
@@ -238,15 +264,91 @@ for(pp in c(19,22)){
   tf.matrix=tf.matrix[-which(rowSums(tf.matrix)==0),]
   tf.matrix=tf.matrix[-which(rowSums(tf.matrix)==ncol(tf.matrix)),]
   
+  # k-means clustering of samples
+  set.seed(0)
+  km=kmeans(tf.matrix,centers = 20)
+  # sort the order of clustering by proportion of false prediction by scAnnotate
+  sort.cluster=matrix(NA,nrow=length(km$cluster),ncol = 1)
+  colnames(sort.cluster)="sort_cluster"
+  cc.correct=matrix(NA,nrow = length(table(km$cluster)),ncol = 2) #proprtion of false prediction by scAnnotate for each clustering
+  colnames(cc.correct)=c("proprotion_false","sort_cluster")
+  for(cc in 1:nrow(cc.correct)){
+    cc.correct[cc,1]=sum(tf.matrix[which(km$cluster==cc),1]==0)/sum(km$cluster==cc)
+  }
+  
+  cc.correct[,2]=order(cc.correct[,1],decreasing = TRUE)
+  
+  
+  for(cc in 1:nrow(cc.correct)){
+    sort.cluster[which(km$cluster==cc.correct[cc,2]),1]=cc
+  }
+  
+
+  sample.idx=order(sort.cluster[,1])
+  
+  
+  tf.matrix.sort=tf.matrix[sample.idx,]
+  
+  df3=as.data.frame(tf.matrix.sort)
+  
+  for(ii in 1:ncol(df3)){
+    df3[,ii]=factor(df3[,ii])
+  }
+  
+  df3$row.names=rownames(df3)
+  #reorder factors
+  df3$row.names=factor(df3$row.names,levels = df3$row.names)
+  
+  long.df.3=melt(df3,id=c("row.names"))
+  colnames(long.df.3)=c("sample","methods","annotation")
+  
+  long.df.3$annotation=str_replace_all(long.df.3$annotation,"0","False")
+  long.df.3$annotation=str_replace_all(long.df.3$annotation,"1","True")
+  
+  ggplot(long.df.3,aes(x=sample,y=methods,fill=annotation))+
+    geom_tile()+
+    labs(y="methods",x="sample")+
+    theme(axis.text.x = element_blank())+
+    scale_fill_manual(values = c("black","#e5e1e1"))+
+    theme(text = element_text(size=22),legend.title = element_text(size=22))
+  
+  ggsave(paste0("ensemble_top_",pp,".png"),width = 50, height = 25, units = "cm") 
+  
+}
+
+for(pp in 19){
+  #clustering all
+  selected.results=label_list[[pp]][,c(1:7)]
+  
+  tf.matrix=matrix(NA,nrow = nrow(selected.results),ncol = ncol(selected.results)-1)
+  colnames(tf.matrix)=methods.names[1:6]
+  
+  for(ii in 1:ncol(tf.matrix)){
+    tf.matrix[which(selected.results[,1]==selected.results[,ii+1]),ii]="1"
+    tf.matrix[which(selected.results[,1]!=selected.results[,ii+1]),ii]="0"
+  }
+  
+  tf.matrix=apply(tf.matrix,2,as.numeric)
+  
+  all.t=length(which(rowSums(tf.matrix)==0))
+  all.f=length(which(rowSums(tf.matrix)==ncol(tf.matrix)))
+  sample.select=nrow(tf.matrix)
+  
+  tf.matrix=tf.matrix[-which(rowSums(tf.matrix)==0),]
+  tf.matrix=tf.matrix[-which(rowSums(tf.matrix)==ncol(tf.matrix)),]
+  
+  some.t=nrow(tf.matrix)
+  
   hc=hclust(dist(t(tf.matrix)),"ave")
   ggdendrogram(hc)+
     theme(text = element_text(size=22),legend.title = element_text(size=22))+
     coord_flip()+
     scale_y_reverse()
   
-  ggsave(paste0("dendrogram_",pp,".png"),width = 15, height = 25, units = "cm")
+  ggsave(paste0("dendrogram_",pp,".png"),width = 5, height = 8, units = "cm")
   
   # k-means clustering of samples
+  set.seed(0)
   km=kmeans(tf.matrix,centers = 20)
   # sort the order of clustering by proportion of false prediction by scAnnotate
   sort.cluster=matrix(NA,nrow=length(km$cluster),ncol = 1)
@@ -292,11 +394,6 @@ for(pp in c(19,22)){
                                                           "CaSTLe","scClassify",
                                                           "singleCellNet","scPred"))
   }
-  if(pp==22){
-    long.df.3$methods=factor(long.df.3$methods,levels = c("scPred","scClassify",
-                                                          "singleCellNet","CaSTLe",
-                                                          "SingleR","scAnnotate"))
-  }
   
   ggplot(long.df.3,aes(x=sample,y=methods,fill=annotation))+
     geom_tile()+
@@ -306,8 +403,9 @@ for(pp in c(19,22)){
     theme(axis.title.y = element_blank())+
     theme(axis.title.x = element_blank())
   
-  ggsave(paste0("ensemble_top_",pp,".png"),width = 50, height = 25, units = "cm") 
+  ggsave(paste0("ensemble_top_",pp,".png"),width = 50, height = 8, units = "cm") 
 }
+
 
 
 
