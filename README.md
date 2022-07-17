@@ -165,12 +165,12 @@ symbols
 |ggdendro|0.1.23|
 
 
-- scAnnotate will be available to download from CRAN later. Before it is available in CRAN, you can directly download the package file scAnnotate_0.0.1.tar from here.
+- scAnnotate installation:
 
 - To install the package, type the following at the command line:
 
 ```
-R CMD INSTALL scAnnotate_0.0.1.tar
+install.packages("scAnnotate")
 ```
 
 ---
