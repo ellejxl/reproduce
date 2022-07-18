@@ -94,8 +94,7 @@ algorithms. We use a marginal mixture model to describe both the dropout proport
     │            ├── scPred.r                              # R scripts to run competing method scPred on the selected dataset
     │            ├── singleCellNet.r                       # R scripts to run competing method singleCellNet on the selected dataset
     │            ├── SingleR.r                             # R scripts to run competing method SingleR on the selected dataset
-    │            └── human_mouse_genes_Jul_24_2018.rda     # ortholog table provided by SingleCellNet to converted the human gene symbols to mouse ortholog gene
-symbols
+    │            └── human_mouse_genes_Jul_24_2018.rda     # ortholog table provided by SingleCellNet to converted the human gene symbols to mouse ortholog gene symbols
     │
     │     └── 5. CV_Baron
     │            ├── cv_Baronhuman.sh                      # Shell script to run cv_Baronhuman.R
