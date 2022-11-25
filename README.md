@@ -96,10 +96,22 @@ algorithms. We use a marginal mixture model to describe both the dropout proport
     │            ├── SingleR.r                             # R scripts to run competing method SingleR on the selected dataset
     │            └── human_mouse_genes_Jul_24_2018.rda     # ortholog table provided by SingleCellNet to converted the human gene symbols to mouse ortholog gene symbols
     │
-    │     └── 5. CV_Baron
-    │            ├── cv_Baronhuman.sh                      # Shell script to run cv_Baronhuman.R
-    │            ├── cv_Baronhuman.R                       # R script to process the Baron human pancreas dataset
-    │            ├── run_cellbench.sh                      # Shell script with loops to submit all shell scripts for each method on the Baron human pancreas dataset at once
+    │     └── 5. within_study
+    │            ├── 1. Baron_human                        # R script and shell script to process the dataset
+    │            ├── 2. ALM                                # R script and shell script to process the dataset
+    │            ├── 3. Baron_mouse                        # R script and shell script to process the dataset
+    │            ├── 4. cellbench_10x                      # R script and shell script to process the dataset
+    │            ├── 5. cellbench_cs                       # R script and shell script to process the dataset
+    │            ├── 6. MTG                                # R script and shell script to process the dataset
+    │            ├── 7. PBMC_10x-v2                        # R script and shell script to process the dataset
+    │            ├── 8. PBMC_10x-v3                        # R script and shell script to process the dataset
+    │            ├── 9. PBMC_10x-CS                        # R script and shell script to process the dataset
+    │            ├── 10. PBMC_10x-DS                       # R script and shell script to process the dataset
+    │            ├── 11. PBMC_10x-ID                       # R script and shell script to process the dataset
+    │            ├── 12. PBMC_10x-SS                       # R script and shell script to process the dataset
+    │            ├── 13. PBMC_10x-SW                       # R script and shell script to process the dataset
+    │            ├── 14. VISp                              # R script and shell script to process the dataset
+    │            ├── run_cv.sh                             # Shell script with loops to submit all shell scripts for each method on selected dataset at once
     │            ├── run.sh                                # Shell script to run each corresponding R script on the selected dataset
     │            ├── scAnnotate.r                          # R script to run our method, scAnnotate, on the selected dataset
     │            ├── CaSTLe.r                              # R script to run competing method CaSTLe on the selected dataset
@@ -110,7 +122,8 @@ algorithms. We use a marginal mixture model to describe both the dropout proport
     │            ├── scmapCluster.r                        # R script to run competing method scmapCluster on the selected dataset
     │            ├── scPred.r                              # R script to run competing method scPred on the selected dataset
     │            ├── singleCellNet.r                       # R script to run competing method singleCellNet on the selected dataset
-    │            └── SingleR.r                             # R script to run competing method SingleR on the selected dataset   
+    │            ├── SingleR.r                             # R script to run competing method SingleR on the selected dataset 
+    │            └── summary_results.R                     # R script to summary the ten replicated evlaution results on each dataset  
 </details>
 
 <details><summary>results</summary>
@@ -121,12 +134,13 @@ algorithms. We use a marginal mixture model to describe both the dropout proport
     │            ├── 1.2 CellBench                         # All annotation results for each method on the CellBench dataset 
     │            ├── 1.3 Brain                             # All annotation results for each method on the Brain dataset
     │            ├── 1.4 Pancreas                          # All annotation results for each method on the pancreas dataset
-    │            └── 1.5 CV_Baron                          # All annotation results for each method on the Baron human dataset
+    │            └── 1.5 within_study                      # All annotation results of within study evalution for each method on all 14 dataset
     |
     │     └── 2. analysis scripts        
     │            ├── results_crossplatform.R               # R script to evaluate the performance of each method on cross-platform datasets by accuracy for each cell population, mean accuracy, and overall accuracy
     │            ├── results_crossspecies.R                # R script to evaluate the performance of each method on cross-species datasets by accuracy for each cell population, mean accuracy, and overall accuracy
-    │            └──results_cv.R                          # R script to evaluate the performance of each method on intra-datasets (Baron_human) by accuracy for each cell population, mean accuracy, and overall accuracy 
+    │            ├── results_withinstudy.R                 # R script to evaluate the performance of each method on intra-datasets  by accuracy for each cell population, mean accuracy, and overall accuracy 
+    │            └── zero proportion difference.R          # R script of two proportional test on proportional zero in each cell populations
 </details>
   
 
@@ -260,17 +274,17 @@ install.packages("scAnnotate")
 </details>
 
 
-<details><summary>5. CV_Baron </summary>
+<details><summary>5. within_study </summary>
   
-  1). Move the selected dataset into the (**home directory?) folder: the selected dataset "Baron_human.rds" is outputted from processing_Baron.R (which is already run in Step 4 above)
+  1). Move the selected dataset into the (**home directory?) folder: for example, the selected dataset "Baron_human.rds" is outputted from processing_Baron.R (which is already run in Step 4 above)
 
-  2). Process the dataset: submit the shell script to process the Baron human pancreas dataset
+  2). Process the dataset: submit the shell script to process the selected dataset
 ~~~
  sbatch cv_Baronhuman.sh
 ~~~
   3). Run the methods: submit the shell script to run each method's R script on the selected dataset.
 ~~~
- sbatch run_baron10.sh
+ sbatch run_cv.sh
 ~~~
 </details>
 
