@@ -117,12 +117,12 @@ saveRDS(perform.list,file="crossspecies_performance.rds")
 acc.oup.dat=matrix(NA,ncol =length(methods.names),nrow = length(dat_combine_list) )
 colnames(acc.oup.dat)=methods.names
 dat_combine_list
-rownames(acc.oup.dat)=c("human_mouse (Pancreas)",
-                        "mouse_human (Pancreas)",
-                        "mouse[V1]_human (Brain)",
-                        "mouse[ALM]_human (Brain)",
-                        "human_mouse[V1] (Brain)",
-                        "human_mouse[ALM] (Brain)")
+rownames(acc.oup.dat)=c("human, mouse (Pancreas)",
+                        "mouse, human (Pancreas)",
+                        "mouse[VISp], human (Brain)",
+                        "mouse[ALM], human (Brain)",
+                        "human, mouse[VISp] (Brain)",
+                        "human, mouse[ALM] (Brain)")
 
 for(ii in 1:length(dat_combine_list)){
   for(kk in 1:length(methods.names)){
@@ -176,18 +176,19 @@ ggplot(df.oup, aes(x=dataset,y = methods))+
                                  "#FF9529","#FFDF00",
                                  "#0171B9","#AFDCEC",
                                  "#107C10","#3CB043","#d0f0c0"))+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=0.35))+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))+
   theme(axis.title.y = element_blank())+
   theme(axis.title.x = element_blank())+
-  theme(text = element_text(size=22),legend.title = element_text(size=22),legend.position = "left")+
-  guides(color = guide_legend(override.aes = list(size = 6)))
+  theme(text = element_text(size=19),legend.title = element_text(size=19),legend.position = "left")+
+  guides(color = guide_legend(override.aes = list(size = 5)))+
+  scale_x_discrete(labels=function(x) str_wrap(x,width = 19))
 
-ggsave("crossspecies_acc.png",width = 25, height = 25, units = "cm")  
+ggsave("crossspecies_acc.png",width = 25, height = 16, units = "cm")  
 
 
-#boxplot
+#violin plot
 ggplot(long.df.2,aes(x=variable,y=Accuracy))+
-  geom_boxplot()+
+  geom_violin()+
   labs(y="Classification accuracy",
        x="methods")+
 #  geom_dotplot(binaxis='y', stackdir='center', dotsize=0.05)+
@@ -195,10 +196,12 @@ ggplot(long.df.2,aes(x=variable,y=Accuracy))+
   theme_bw()+
   theme(axis.title.y = element_blank())+
   theme(axis.title.x = element_blank())+
-  theme(text = element_text(size=22),legend.text = element_text(size=12),legend.title = element_text(size=12))+
+  theme(axis.text.y=element_blank())+
+  theme(text = element_text(size=18),legend.text = element_text(size=10),legend.title = element_text(size=11))+
   coord_flip()
+  
 
 
-ggsave("boxplot_crossspecies_acc.png",width = 25, height = 25, units = "cm")
+ggsave("violin_crossspecies_acc.png",width = 8, height = 12, units = "cm")
 
 

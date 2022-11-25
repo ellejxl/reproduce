@@ -117,11 +117,12 @@ saveRDS(perform.list,file="crossplatform_performance.rds")
 #3.acc summary
 acc.oup.dat=matrix(NA,ncol =length(methods.names),nrow = length(dat_combine_list) )
 colnames(acc.oup.dat)=methods.names
-tissue=c(rep(" (PBMC)",length(dat_combine_list)-length(train_dat_list)),
-         rep("(Lung Cancer)",length(train_dat_list)))
-rownames(acc.oup.dat)=paste0(str_split_fixed(dat_combine_list,"_",4)[,2],", ",str_split_fixed(dat_combine_list,"_",4)[,4],tissue)
-rownames(acc.oup.dat)[43]="CEL-Seq2, 10x (Lung Cancer)"
-rownames(acc.oup.dat)[44]="10x, CEL-Seq2 (Lung Cancer)"
+#tissue=c(rep(" (PBMC)",length(dat_combine_list)-length(train_dat_list)),
+#         rep("(Lung Cancer)",length(train_dat_list)))
+#rownames(acc.oup.dat)=paste0(str_split_fixed(dat_combine_list,"_",4)[,2],", ",str_split_fixed(dat_combine_list,"_",4)[,4],tissue)
+rownames(acc.oup.dat)=paste0(str_split_fixed(dat_combine_list,"_",4)[,2],", ",str_split_fixed(dat_combine_list,"_",4)[,4])
+rownames(acc.oup.dat)[43]="CEL-Seq2, 10x (*)"
+rownames(acc.oup.dat)[44]="10x, CEL-Seq2 (*)"
 
 for(ii in 1:length(dat_combine_list)){
   for(kk in 1:length(methods.names)){
@@ -138,7 +139,7 @@ wilcox.matrix=matrix(NA,nrow = length(methods.names)-1,ncol =1)
 colnames(wilcox.matrix)=methods.names[1]
 rownames(wilcox.matrix)=methods.names[-1]
 for(ii in 1:nrow(wilcox.matrix)){
-  wilcox.matrix[ii,1]=wilcox.test(acc.oup.dat[,1],acc.oup.dat[,ii+1])$p.value
+  wilcox.matrix[ii,1]=wilcox.test(acc.oup.dat[,1],acc.oup.dat[,ii+1],paired = TRUE)$p.value
 }
 
 
@@ -175,18 +176,18 @@ ggplot(df.oup, aes(x=dataset,y = methods))+
                                  "#FF9529","#FFDF00",
                                  "#0171B9","#AFDCEC",
                                  "#107C10","#3CB043","#d0f0c0"))+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=0.35))+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))+
   theme(axis.title.y = element_blank())+
   theme(axis.title.x = element_blank())+
-  theme(text = element_text(size=22),legend.title = element_text(size=22),legend.position = "left")+
-  guides(color = guide_legend(override.aes = list(size = 6)))
+  theme(text = element_text(size=19),legend.title = element_text(size=19),legend.position = "left")+
+  guides(color = guide_legend(override.aes = list(size = 5)))
 
-ggsave("crossplatform_acc.png",width = 50, height = 25, units = "cm")  
+ggsave("crossplatform_acc.png",width = 50, height = 17, units = "cm")  
 
-#boxplot1: compared by each methods
+#geom_violin 1: compared by each methods
 
 ggplot(long.df.2,aes(x=variable,y=Accuracy))+
-  geom_boxplot()+
+  geom_violin()+
   labs(y="Classification accuracy",
        x="methods")+
 #  geom_dotplot(binaxis='y', stackdir='center', dotsize=0.05)+
@@ -194,15 +195,16 @@ ggplot(long.df.2,aes(x=variable,y=Accuracy))+
   theme_bw()+
   theme(axis.title.y = element_blank())+
   theme(axis.title.x = element_blank())+
-  theme(text = element_text(size=22),legend.text = element_text(size=12),legend.title = element_text(size=12))+
+  theme(axis.text.y=element_blank())+
+  theme(text = element_text(size=20),legend.text = element_text(size=11),legend.title = element_text(size=11))+
   coord_flip()
 
 
-ggsave("boxplot_crossplatform_acc.png",width = 25, height = 25, units = "cm")
+ggsave("violin_crossplatform_acc.png",width = 12, height = 12, units = "cm")
 
-#boxplot2: compared by each dataset combination
+#geom_violin 2: compared by each dataset combination
 ggplot(df.oup, aes(x=dataset,y = Accuracy))+
-  geom_boxplot()+
+  geom_violin()+
   labs(y="Classification accuracy",
        x="dataset")+
   theme_bw()+
@@ -211,7 +213,7 @@ ggplot(df.oup, aes(x=dataset,y = Accuracy))+
   theme(axis.title.x = element_blank())+
   theme(text = element_text(size=22),legend.title = element_text(size=22))
 
-ggsave("boxplot_crossplatform_dataset.png",width = 50, height = 25, units = "cm")   
+ggsave("violin_crossplatform_dataset.png",width = 50, height = 15, units = "cm")   
 
 #6. ensemble plot
 
@@ -246,6 +248,19 @@ for(pp in 1:length(label_list)){
 
 
 #only well performed methods
+
+#add dataset name in each plot
+dataset.names=names(label_list)
+dataset.names
+dataset.names=str_replace_all(dataset.names,"pbmc_10x-v3","PBMC.10Xv3")
+dataset.names=str_replace_all(dataset.names,"pbmc_10x-v2","PBMC.10Xv2")
+dataset.names=str_replace_all(dataset.names,"pbmc_Smart-seq2","PBMC.SS")
+dataset.names=str_replace_all(dataset.names,"pbmc_Seq-Well","PBMC.SW")
+dataset.names=str_replace_all(dataset.names,"pbmc_inDrops","PBMC.ID")
+dataset.names=str_replace_all(dataset.names,"pbmc_Drop-seq","PBMC.DS")
+dataset.names=str_replace_all(dataset.names,"pbmc_CEL-Seq2","PBMC.CS")
+dataset.names=str_replace_all(dataset.names,"_",", ")
+
 for(pp in 1:length(label_list)){
   
   #clustering all
@@ -307,12 +322,13 @@ for(pp in 1:length(label_list)){
   
   ggplot(long.df.3,aes(x=sample,y=methods,fill=annotation))+
     geom_tile()+
-    labs(y="methods",x="sample")+
+    labs(title=paste0("dataset (training, test): ",dataset.names[pp]),y="methods",x="Cell")+
     theme(axis.text.x = element_blank())+
+    theme(axis.title.y = element_blank())+
     scale_fill_manual(values = c("black","#e5e1e1"))+
     theme(text = element_text(size=22),legend.title = element_text(size=22))
   
-  ggsave(paste0("ensemble_top_",pp,".png"),width = 50, height = 25, units = "cm") 
+  ggsave(paste0("ensemble_top_",pp,".png"),width = 30, height = 8, units = "cm") 
   
 }
 
@@ -403,7 +419,7 @@ for(pp in 19){
     theme(axis.title.y = element_blank())+
     theme(axis.title.x = element_blank())
   
-  ggsave(paste0("ensemble_top_",pp,".png"),width = 50, height = 8, units = "cm") 
+  ggsave(paste0("ensemble_top_",pp,".png"),width = 30, height = 8, units = "cm") 
 }
 
 
