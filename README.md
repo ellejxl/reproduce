@@ -189,7 +189,7 @@ install.packages("scAnnotate")
 ---
 
 # Running files
-- We have arranged the scripts by dataset type (1. PBMC 2. CellBench 3. Brain 4. Pancreas 5. CV_Baron); you can follow this order to reproduce all of our results. 
+- We have arranged the scripts by dataset type (1. PBMC 2. CellBench 3. Brain 4. Pancreas 5. within_study); you can follow this order to reproduce all of our results. 
 - All of our scripts were run on ComputeCanada. Before you submit our provided shell scripts, please change the account ID in each shell script (#SBATCH --account=) to that of your own ComputeCanada account. 
 - All of the raw datasets used in our study are publicly available. Due to GitHub's file size limitation, we are unable to upload the raw data files here. Please download the raw datasets used in this study directly from their original sources before running the scripts.
 
